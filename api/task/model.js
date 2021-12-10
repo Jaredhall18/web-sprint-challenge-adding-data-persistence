@@ -14,19 +14,19 @@ async function getTasks() {
     }))
 }
 
-async function createProject(project) {
-   return db('projects').insert(project)
-    .then(([project_id]) => {
-        return db('projects').where('project_id', project_id)
+async function createTask(task) {
+   return db('tasks').insert(task)
+    .then(([task_id]) => {
+        return db('tasks').where('task_id', task_id)
             .first()
             .then((resp) => ({
                 ...resp,
-                project_completed: !!resp.project_completed
+                task_completed: !!resp.task_completed
             })) 
     })
 }
 
 module.exports = {
     getTasks,
-    createProject,
+    createTask,
 }
